@@ -3,42 +3,40 @@
  */
 package uk.org.lidalia.gradle.plugin.downloaddependencies
 
-import java.io.File
-import java.nio.file.Files
-import kotlin.test.assertTrue
-import kotlin.test.Test
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.engine.spec.tempdir
+import io.kotest.matchers.string.shouldContain
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 
 /**
  * A simple functional test for the 'uk.org.lidalia.gradle.plugin.downloaddependencies.greeting' plugin.
  */
-class LidaliaDownloadDependenciesPluginFunctionalTest {
-    @get:Rule val tempFolder = TemporaryFolder()
+class LidaliaDownloadDependenciesPluginFunctionalTest : StringSpec({
 
-    private fun getProjectDir() = tempFolder.root
-    private fun getBuildFile() = getProjectDir().resolve("build.gradle")
-    private fun getSettingsFile() = getProjectDir().resolve("settings.gradle")
+    val tempFolder = tempdir()
 
-    @Test fun `can run task`() {
+    fun getProjectDir() = tempFolder
+    fun getBuildFile() = getProjectDir().resolve("build.gradle")
+    fun getSettingsFile() = getProjectDir().resolve("settings.gradle")
+
+    "can run task" {
         // Setup the test build
         getSettingsFile().writeText("")
         getBuildFile().writeText("""
 plugins {
-    id('uk.org.lidalia.gradle.plugin.downloaddependencies.greeting')
+    id('uk.org.lidalia.gradle.plugin.downloaddependencies')
 }
 """)
 
         // Run the build
-        val runner = GradleRunner.create()
-        runner.forwardOutput()
-        runner.withPluginClasspath()
-        runner.withArguments("greeting")
-        runner.withProjectDir(getProjectDir())
-        val result = runner.build();
+        val result = GradleRunner.create()
+            .forwardOutput()
+            .withPluginClasspath()
+            .withArguments("--info", "downloadDependencies")
+            .withProjectDir(getProjectDir())
+            .build()
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'uk.org.lidalia.gradle.plugin.downloaddependencies.greeting'"))
+        result.output shouldContain "Downloaded all dependencies"
     }
-}
+})

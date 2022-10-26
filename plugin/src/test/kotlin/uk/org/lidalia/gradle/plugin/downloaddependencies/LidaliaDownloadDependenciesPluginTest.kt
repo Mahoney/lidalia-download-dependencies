@@ -3,20 +3,20 @@
  */
 package uk.org.lidalia.gradle.plugin.downloaddependencies
 
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldNotBe
 import org.gradle.testfixtures.ProjectBuilder
-import kotlin.test.Test
-import kotlin.test.assertNotNull
 
 /**
  * A simple unit test for the 'uk.org.lidalia.gradle.plugin.downloaddependencies.greeting' plugin.
  */
-class LidaliaDownloadDependenciesPluginTest {
-    @Test fun `plugin registers task`() {
+class LidaliaDownloadDependenciesPluginTest : StringSpec({
+    "plugin registers task" {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
-        project.plugins.apply("uk.org.lidalia.gradle.plugin.downloaddependencies.greeting")
+        project.plugins.apply("uk.org.lidalia.gradle.plugin.downloaddependencies")
 
         // Verify the result
-        assertNotNull(project.tasks.findByName("greeting"))
+        project.tasks.findByName("downloadDependencies") shouldNotBe null
     }
-}
+})
