@@ -30,14 +30,14 @@ jobs:
         with:
           check_name: Unit Test Results
           junit_files: |
-            build/test-results/**/*.xml
+            plugin/build/test-results/**/*.xml
 
       - name: Archive test results
         uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: test-reports
-          path: build/reports/tests/test/
+          path: plugin/build/reports/tests
 
   publish:
     if: github.ref_name == 'main'
