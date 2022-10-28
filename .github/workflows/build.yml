@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    if: github.ref_name != 'main'
     runs-on: ubuntu-22.04
 
     steps:
@@ -59,4 +60,6 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Publish to Lidalia Repo
-        run: ./gradlew publishPlugins
+        env:
+          LIDALIA_MVN_REPO_PASSWORD=${{ secrets.DEPLOY_PACKAGE_PAT }}
+        run: ./gradlew publishPluginMavenPublicationToLidalia-public-maven-repoRepository
