@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION") // Remove once KTIJ-19369 is fixed
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
-    @Suppress("DSL_SCOPE_VIOLATION") // Remove once KTIJ-19369 is fixed
     alias(libs.plugins.kotlin)
+    `maven-publish`
 }
 
 repositories {
@@ -24,8 +25,21 @@ gradlePlugin {
     // Define the plugin
     @Suppress("UNUSED_VARIABLE")
     val downloadDependencies by plugins.creating {
-        id = "uk.org.lidalia.gradle.plugin.downloaddependencies"
+        id = "uk.org.lidalia.downloaddependencies"
         implementationClass = "uk.org.lidalia.gradle.plugin.downloaddependencies.LidaliaDownloadDependenciesPlugin"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "lidalia-public-maven-repo"
+            url = uri("https://maven.pkg.github.com/Mahoney/public-repo")
+            credentials {
+                username = project.propertyOrEnvVar("LIDALIA_MVN_REPO_USERNAME")
+                password = project.propertyOrEnvVar("LIDALIA_MVN_REPO_PASSWORD")
+            }
+        }
     }
 }
 
@@ -51,3 +65,6 @@ tasks.named<Task>("check") {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
+
+fun Project.propertyOrEnvVar(usernameKey: String) =
+    findProperty(usernameKey)?.toString() ?: System.getenv(usernameKey)

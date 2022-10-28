@@ -8,13 +8,13 @@ import io.kotest.matchers.shouldNotBe
 import org.gradle.testfixtures.ProjectBuilder
 
 /**
- * A simple unit test for the 'uk.org.lidalia.gradle.plugin.downloaddependencies.greeting' plugin.
+ * A simple unit test for the 'uk.org.lidalia.downloaddependencies' plugin.
  */
 class LidaliaDownloadDependenciesPluginTest : StringSpec({
     "plugin registers task" {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
-        project.plugins.apply("uk.org.lidalia.gradle.plugin.downloaddependencies")
+        project.plugins.apply("uk.org.lidalia.downloaddependencies")
 
         // Verify the result
         project.tasks.findByName("downloadDependencies") shouldNotBe null
