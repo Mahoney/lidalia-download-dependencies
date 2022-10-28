@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    if: github.ref_name != 'main'
     runs-on: ubuntu-22.04
 
     steps:
