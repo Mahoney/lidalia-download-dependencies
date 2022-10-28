@@ -9,7 +9,7 @@ import io.kotest.matchers.string.shouldContain
 import org.gradle.testkit.runner.GradleRunner
 
 /**
- * A simple functional test for the 'uk.org.lidalia.gradle.plugin.downloaddependencies.greeting' plugin.
+ * A simple functional test for the 'uk.org.lidalia.downloaddependencies' plugin.
  */
 class LidaliaDownloadDependenciesPluginFunctionalTest : StringSpec({
 
@@ -24,7 +24,7 @@ class LidaliaDownloadDependenciesPluginFunctionalTest : StringSpec({
         getSettingsFile().writeText("")
         getBuildFile().writeText("""
 plugins {
-    id('uk.org.lidalia.gradle.plugin.downloaddependencies')
+    id('uk.org.lidalia.downloaddependencies')
 }
 """)
 
