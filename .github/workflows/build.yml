@@ -60,5 +60,5 @@ jobs:
 
       - name: Publish to Lidalia Repo
         env:
-          LIDALIA_MVN_REPO_PASSWORD: ${{ secrets.DEPLOY_PACKAGE_PAT }}
+          LIDALIA_MVN_REPO_PASSWORD: ${{ secrets.DEPLOY_PACKAGE_LIDALIA_JFROG_TOKEN }}
         run: ./gradlew publishPluginMavenPublicationToLidalia-public-maven-repoRepository
