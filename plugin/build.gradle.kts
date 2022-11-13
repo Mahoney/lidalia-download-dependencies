@@ -34,7 +34,7 @@ publishing {
     repositories {
         maven {
             name = "lidalia-public-maven-repo"
-            url = uri("https://lidalia.jfrog.io/ui/admin/repositories/local/lidalia")
+            url = uri("https://lidalia.jfrog.io/artifactory/lidalia/")
             credentials {
                 username = project.propertyOrEnvVar("LIDALIA_MVN_REPO_USERNAME")
                 password = project.propertyOrEnvVar("LIDALIA_MVN_REPO_PASSWORD")
