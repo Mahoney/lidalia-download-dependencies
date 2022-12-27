@@ -28,6 +28,7 @@ gradlePlugin {
     @Suppress("UNUSED_VARIABLE")
     val downloadDependencies by plugins.creating {
         id = "uk.org.lidalia.downloaddependencies"
+        version = "0.1.0"
         implementationClass = "uk.org.lidalia.gradle.plugin.downloaddependencies.LidaliaDownloadDependenciesPlugin"
     }
 }
@@ -68,6 +69,3 @@ tasks.named<Task>("check") {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
-
-fun Project.propertyOrEnvVar(usernameKey: String) =
-    findProperty(usernameKey)?.toString() ?: System.getenv(usernameKey)
