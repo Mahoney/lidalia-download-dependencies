@@ -23,7 +23,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: check
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -61,9 +63,9 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: arn:aws:iam::044864346383:role/GitHub-Publish-Maven-Artifacts
-          aws-region: us-east-1
+          aws-region: eu-west-2
 
       - name: Publish to Lidalia Repo
-        env:
-          LIDALIA_MVN_REPO_PASSWORD: ${{ secrets.DEPLOY_PACKAGE_LIDALIA_JFROG_TOKEN }}
-        run: ./gradlew publishPluginMavenPublicationToLidalia-public-maven-repoRepository
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishPluginMavenPublicationToLidalia-public-maven-repoRepository
