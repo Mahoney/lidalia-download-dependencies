@@ -35,6 +35,7 @@ gradlePlugin {
 publishing {
     repositories {
       maven {
+        name = "lidalia-public"
         url = URI("s3://lidalia-maven-public-repo/releases/")
         credentials(AwsCredentials::class.java)
       }
