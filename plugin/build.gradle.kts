@@ -40,6 +40,7 @@ publishing {
         credentials(AwsCredentials::class.java) {
           accessKey = System.getenv("AWS_ACCESS_KEY_ID")
           secretKey = System.getenv("AWS_SECRET_ACCESS_KEY")
+          sessionToken = System.getenv("AWS_SESSION_TOKEN")
         }
       }
     }
