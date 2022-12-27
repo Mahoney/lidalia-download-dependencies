@@ -1,6 +1,9 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 # These permissions are needed to interact with GitHub's OIDC Token endpoint.
 permissions:
@@ -10,7 +13,6 @@ permissions:
 jobs:
 
   publish:
-    if: github.ref_name == 'main'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
