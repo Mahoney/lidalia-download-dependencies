@@ -1,3 +1,5 @@
+import java.net.URI
+
 @Suppress("DSL_SCOPE_VIOLATION") // Remove once KTIJ-19369 is fixed
 plugins {
     `java-gradle-plugin`
@@ -32,14 +34,10 @@ gradlePlugin {
 
 publishing {
     repositories {
-        maven {
-            name = "lidalia-public-maven-repo"
-            url = uri("https://lidalia.jfrog.io/artifactory/lidalia/")
-            credentials {
-                username = project.propertyOrEnvVar("LIDALIA_MVN_REPO_USERNAME")
-                password = project.propertyOrEnvVar("LIDALIA_MVN_REPO_PASSWORD")
-            }
-        }
+      maven {
+        url = URI("s3://lidalia-maven-public-repo/releases/")
+        credentials(AwsCredentials::class.java)
+      }
     }
 }
 
