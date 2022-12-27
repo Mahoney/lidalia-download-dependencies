@@ -37,7 +37,10 @@ publishing {
       maven {
         name = "lidalia-public"
         url = URI("s3://lidalia-maven-public-repo/releases/")
-        credentials(AwsCredentials::class.java)
+        credentials(AwsCredentials::class.java) {
+          accessKey = System.getenv("AWS_ACCESS_KEY_ID")
+          secretKey = System.getenv("AWS_SECRET_ACCESS_KEY")
+        }
       }
     }
 }
