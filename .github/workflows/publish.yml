@@ -1,0 +1,38 @@
+name: Java CI
+
+on: [push]
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  publish:
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::044864346383:role/GitHub-Publish-Maven-Artifacts
+          aws-region: eu-west-2
+
+      - name: Publish to Lidalia Repo
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publishAllPublicationsToLidalia-publicRepository
