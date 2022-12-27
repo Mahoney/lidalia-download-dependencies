@@ -28,7 +28,7 @@ gradlePlugin {
     @Suppress("UNUSED_VARIABLE")
     val downloadDependencies by plugins.creating {
         id = "uk.org.lidalia.downloaddependencies"
-        version = "0.1.0"
+        version = "0.2.0"
         implementationClass = "uk.org.lidalia.gradle.plugin.downloaddependencies.LidaliaDownloadDependenciesPlugin"
     }
 }
