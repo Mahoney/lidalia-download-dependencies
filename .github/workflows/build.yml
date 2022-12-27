@@ -2,6 +2,14 @@ name: Java CI
 
 on: [push]
 
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
 jobs:
   build:
     if: github.ref_name != 'main'
