@@ -14,12 +14,6 @@ repositories {
 }
 
 dependencies {
-    // Align versions of all Kotlin components
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.6.10"))
-
-    // Use the Kotlin JDK 8 standard library.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
-
     testImplementation(libs.bundles.kotest)
 }
 
@@ -28,7 +22,7 @@ gradlePlugin {
     @Suppress("UNUSED_VARIABLE")
     val downloadDependencies by plugins.creating {
         id = "uk.org.lidalia.downloaddependencies"
-        version = "0.2.0"
+        version = "0.3.0"
         implementationClass = "uk.org.lidalia.gradle.plugin.downloaddependencies.LidaliaDownloadDependenciesPlugin"
     }
 }
