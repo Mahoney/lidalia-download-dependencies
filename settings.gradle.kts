@@ -9,3 +9,11 @@
 
 rootProject.name = "lidalia-download-dependencies"
 include("plugin")
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    maven {
+      url = uri("https://di3kwt5m0za4f.cloudfront.net/releases")
+    }
+  }
+}
