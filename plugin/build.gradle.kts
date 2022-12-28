@@ -6,6 +6,7 @@ plugins {
     `kotlin-dsl`
     alias(libs.plugins.kotlin)
     `maven-publish`
+    id("uk.org.lidalia.downloaddependencies") version "0.3.0"
 }
 
 repositories {
